@@ -2,7 +2,7 @@ FROM debian:bookworm
 
 RUN apt update -y && apt install -y curl php-fpm php-mysqli
 
-#ADD RIGHTS TO /run/php
+# ADD RIGHTS TO /run/php
 RUN mkdir -p /run/php && chown www-data:www-data /run/php
 
 #COPY WORDPRESS CONFIG AND SET THE WORK DIR

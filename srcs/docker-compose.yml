@@ -1,7 +1,7 @@
 services:
   nginx:
     container_name: nginx
-    build: ./srcs/requirements/nginx
+    build: ./requirements/nginx
     networks:
       - inception
     volumes:
@@ -14,7 +14,7 @@ services:
 
   mariadb:
     container_name: mariadb
-    build: ./srcs/requirements/mariadb
+    build: ./requirements/mariadb
     networks:
       - inception
     volumes:
@@ -25,7 +25,7 @@ services:
       - "3306"
     restart: on-failure
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${DB_ROOT_PASS}"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -33,7 +33,7 @@ services:
 
   wordpress:
     container_name: wordpress
-    build: ./srcs/requirements/wordpress
+    build: ./requirements/wordpress
     networks:
       - inception
     volumes:
@@ -43,9 +43,35 @@ services:
     depends_on:
         mariadb:
           condition: service_healthy
+        redis:
+          condition: service_started
     expose:
       - "9000"
     restart: on-failure
+
+  redis:
+    container_name: redis
+    build: ./requirements/bonus/redis
+    networks:
+      - inception
+    restart: on-failure
+    expose:
+    - "6379"
+
+  ftp:
+    container_name: ftp
+    build: ./requirements/bonus/ftp
+    networks:
+    - inception
+    volumes:
+      - wordpress:/var/www/html
+    env_file:
+      - .env
+    ports:
+      - "21:21"
+      - "21000-21010:21000-21010"
+    restart: on-failure
+  
 
 networks:
   inception:

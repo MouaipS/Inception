@@ -10,6 +10,12 @@ if [ ! -f /var/www/html/wp-config.php ]; then
   ./wp-cli.phar user create $WP_USER2 $WP_MAIL2 --role=author --user_pass=$WP_PASS2 --allow-root
   ./wp-cli.phar user set-role 2 editor --allow-root
   ./wp-cli.phar theme install astra --activate --allow-root
+
+  ./wp-cli.phar config set WP_REDIS_HOST redis --allow-root
+  ./wp-cli.phar config set WP_REDIS_PORT 6379 --raw --allow-root
+  ./wp-cli.phar config set WP_CACHE true --raw --allow-root
+  ./wp-cli.phar plugin install redis-cache --activate --allow-root
+  ./wp-cli.phar redis enable --allow-root
 fi
 
 exec "$@"
