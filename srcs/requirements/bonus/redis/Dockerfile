@@ -1,14 +1,17 @@
 FROM debian:bookworm
 
-RUN apt update \
-    && apt install -y redis-server \
+RUN apt-get update && apt-get install -y \
+    redis-server \
     && rm -rf /var/lib/apt/lists/*
 
-RUN sed -i "s|bind 127.0.0.1|bind 0.0.0.0|g" /etc/redis/redis.conf && \
-    sed -i "s|# maxmemory <bytes>|maxmemory 256mb|g" /etc/redis/redis.conf && \
-    sed -i "s|# maxmemory-policy noeviction|maxmemory-policy allkeys-lru|g" /etc/redis/redis.conf
+COPY conf/redis.conf /etc/redis/redis.conf
 
+RUN mkdir -p /var/lib/redis && \
+    chown -R redis:redis /var/lib/redis && \
+    chmod 755 /var/lib/redis
 
 EXPOSE 6379
 
-CMD ["redis-server", "--protected-mode", "no"]
+USER redis
+
+CMD ["redis-server", "/etc/redis/redis.conf"]
