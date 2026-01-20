@@ -1,0 +1,31 @@
+# SETUP
+bind = 0.0.0.0
+  #listening all networks 
+Port = 6379
+  #default port
+protected-mode = no
+  #yes = binding all the interfaces
+daemonize = no
+  #keep process foreground
+logfile ""
+  #to easily access to logs with 'docker logs redis'
+
+# PERSISTANCE
+save 900 1 
+  #one change in 15min
+save 300 10
+  #10 changes in 5min
+save 60 10000
+  #60 changes in 1min
+dir /var/lib/redis
+dbfilename dump.rdb
+  #file with saves
+
+# MEMORY
+maxmemory 256mb
+  #max memory used by redis
+maxmemory-policy allkeys-lru
+  #optimize update
+
+# SECURITY
+# requirepass your_redis_password
