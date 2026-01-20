@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Reset CSS pour uniformiser les navigateurs */
+}
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Dégradé violet moderne */
+    min-height: 100vh;
+    color: white;
+}
+section {
+    background: rgba(255, 255, 255, 0.1);
+    /* Fond semi-transparent */
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}

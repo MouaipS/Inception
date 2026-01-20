@@ -47,6 +47,8 @@ services:
       - "9000"
     restart: on-failure
 
+##============== BONUS ================##
+
   redis:
     container_name: redis
     build: ./requirements/bonus/redis
@@ -58,20 +60,29 @@ services:
     volumes:
     - redis:/var/lib/redis
 
-  #ftp:
-  #  container_name: ftp
-  #  build: ./requirements/bonus/ftp
-  #  networks:
-  #  - inception
-  #  volumes:
-  #    - wordpress:/var/www/html
-  #  env_file:
-  #    - .env
-  #  ports:
-  #    - "21:21"
-  #    - "21000-21010:21000-21010"
-  #  restart: on-failure
-  
+  ftp:
+    container_name: ftp
+    build: ./requirements/bonus/ftp
+    networks:
+    - inception
+    volumes:
+      - wordpress:/var/www/html
+    env_file:
+      - .env
+    ports:
+      - "21:21"
+      - "21000-21010:21000-21010"
+    restart: on-failure
+
+  static-site:
+    container_name: static-site
+    build: ./requirements/bonus/static-site
+    networks:
+    - inception
+    ports:
+    - "8081:80"
+    restart: on-failure
+
 
 networks:
   inception:
