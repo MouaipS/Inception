@@ -54,9 +54,11 @@ services:
     build: ./requirements/bonus/redis
     networks:
       - inception
-    restart: on-failure
+    restart: always
     expose:
     - "6379"
+    volumes:
+    - redis:/var/lib/redis
 
   ftp:
     container_name: ftp
@@ -91,5 +93,12 @@ volumes:
     driver: local
     driver_opts:
       device: /home/adrouin/data/wordpress
+      o: bind
+      type: none
+  redis:
+    name: redis
+    driver: local
+    driver_opts:
+      device: /home/adrouin/data/redis
       o: bind
       type: none
