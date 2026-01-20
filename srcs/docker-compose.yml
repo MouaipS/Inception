@@ -95,6 +95,22 @@ services:
     - mariadb
     restart: on-failure
 
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:latest
+    # Pas de 'build', on utilise directement l'image Docker Hub
+    networks:
+    - inception
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    # Socket Docker : Permet à Portainer de contrôler Docker
+    - portainer_data:/data
+    # Données persistantes (utilisateurs, configuration)
+    ports:
+    - "9443:9443"
+    # Port HTTPS de Portainer
+    restart: on-failure
+
 networks:
   inception:
     name: inception
@@ -122,3 +138,6 @@ volumes:
       device: /home/adrouin/data/redis
       o: bind
       type: none
+  portainer_data:
+    name: portainer_data
+    driver: local
