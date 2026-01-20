@@ -21,8 +21,6 @@ services:
       - mariadb:/var/lib/mysql
     env_file:
       - .env
-    expose:
-      - "3306"
     restart: on-failure
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${DB_ROOT_PASS}"]
@@ -44,7 +42,7 @@ services:
         mariadb:
           condition: service_healthy
         redis:
-          condition: service_started
+         condition: service_started
     expose:
       - "9000"
     restart: on-failure
@@ -54,25 +52,25 @@ services:
     build: ./requirements/bonus/redis
     networks:
       - inception
-    restart: always
+    restart: on-failure
     expose:
     - "6379"
     volumes:
     - redis:/var/lib/redis
 
-  ftp:
-    container_name: ftp
-    build: ./requirements/bonus/ftp
-    networks:
-    - inception
-    volumes:
-      - wordpress:/var/www/html
-    env_file:
-      - .env
-    ports:
-      - "21:21"
-      - "21000-21010:21000-21010"
-    restart: on-failure
+  #ftp:
+  #  container_name: ftp
+  #  build: ./requirements/bonus/ftp
+  #  networks:
+  #  - inception
+  #  volumes:
+  #    - wordpress:/var/www/html
+  #  env_file:
+  #    - .env
+  #  ports:
+  #    - "21:21"
+  #    - "21000-21010:21000-21010"
+  #  restart: on-failure
   
 
 networks:
