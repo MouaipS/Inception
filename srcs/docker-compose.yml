@@ -97,8 +97,8 @@ services:
 
   portainer:
     container_name: portainer
-    image: portainer/portainer-ce:latest
-    # Pas de 'build', on utilise directement l'image Docker Hub
+    build:
+      context: ./requirements/bonus/portainer
     networks:
     - inception
     volumes:
@@ -107,8 +107,9 @@ services:
     - portainer_data:/data
     # Données persistantes (utilisateurs, configuration)
     ports:
+    - "9000:9000"    # ← Ajoutez cette ligne
     - "9443:9443"
-    # Port HTTPS de Portainer
+    - "8000:8000"    # ← Ajoutez cette ligne
     restart: on-failure
 
 networks:
@@ -139,5 +140,8 @@ volumes:
       o: bind
       type: none
   portainer_data:
-    name: portainer_data
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/adrouin/data/redis
