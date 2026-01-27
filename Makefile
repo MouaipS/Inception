@@ -5,10 +5,11 @@ up:
 	@sudo mkdir -p /home/adrouin/data/mariadb
 	@sudo mkdir -p /home/adrouin/data/wordpress
 	@sudo mkdir -p /home/adrouin/data/redis
+	@sudo mkdir -p /home/adrouin/data/portainer
 	@sudo docker compose -f ./srcs/docker-compose.yml up -d
 
 down:
-	@sudo docker compose -f ./srcs/docker-compose.yml down
+	@sudo docker compose -f ./srcs/docker-compose.yml down -v
 
 clean: down
 	@sudo rm -rf /home/adrouin/data

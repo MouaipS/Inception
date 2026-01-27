@@ -1,4 +1,5 @@
 services:
+##============== MANDA ================##
   nginx:
     container_name: nginx
     build: ./requirements/nginx
@@ -78,9 +79,9 @@ services:
     container_name: static-site
     build: ./requirements/bonus/static-site
     networks:
-    - inception
+      - inception
     ports:
-    - "8081:80"
+      - "8081:80"
     restart: on-failure
 
 
@@ -88,11 +89,11 @@ services:
     container_name: adminer
     build: ./requirements/bonus/adminer
     networks:
-    - inception
+      - inception
     ports:
-    - "8080:8080"
+      - "8080:8080"
     depends_on:
-    - mariadb
+      - mariadb
     restart: on-failure
 
   portainer:
@@ -100,20 +101,24 @@ services:
     build:
       context: ./requirements/bonus/portainer
     networks:
-    - inception
+      - inception
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer:/data
     ports:
-    - "9000:9000"    
-    - "9443:9443"
-    - "8000:8000"
+      - "9001:9000"    
+      - "9443:9443"
+      - "8000:8000"
     restart: on-failure
+
+##============== NETWORK ================##
 
 networks:
   inception:
     name: inception
     driver: bridge
+  
+##============== VOLUMES ================##
 
 volumes:
   mariadb:
@@ -137,7 +142,7 @@ volumes:
       device: /home/adrouin/data/redis
       o: bind
       type: none
-  portainer_data:
+  portainer:
     driver: local
     driver_opts:
       type: none

@@ -189,7 +189,7 @@ These commands use the docker compose commands.
 
 [To access WordPress (*443)](https://localhost:443)
 
-[To access Portainer (9000)](http://localhost:9000)
+[To access Portainer (9001)](http://localhost:9000)
 
 [To access Portainer (*9443)](http://localhost:9443)
 

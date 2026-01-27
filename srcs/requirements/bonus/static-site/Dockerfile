@@ -6,7 +6,6 @@ RUN apt update -y && apt install -y nginx \
 # Copier ton bloc server seulement
 COPY conf/default.conf /etc/nginx/sites-available/default
 
-# Copier les fichiers statiques
 COPY tools/index.html /var/www/html/
 COPY tools/style.css /var/www/html/
 
