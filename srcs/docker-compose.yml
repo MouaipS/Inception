@@ -103,13 +103,11 @@ services:
     - inception
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    # Socket Docker : Permet à Portainer de contrôler Docker
     - portainer_data:/data
-    # Données persistantes (utilisateurs, configuration)
     ports:
-    - "9000:9000"    # ← Ajoutez cette ligne
+    - "9000:9000"    
     - "9443:9443"
-    - "8000:8000"    # ← Ajoutez cette ligne
+    - "8000:8000"
     restart: on-failure
 
 networks:
@@ -144,4 +142,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/adrouin/data/redis
+      device: /home/adrouin/data/portainer
