@@ -76,7 +76,7 @@ https://stephane-arrami.com/articles/guide-pratique-pour-dockeriser-wordpress-av
 
 ## AI Usage
 
-Claude.ai was used to have tracks and debuggage when it wasn’t obvious. He helped me a lot to see errors of inattention like bad syntax.
+Claude.ai was used to have tracks and debuggage when it wasn’t obvious. He helped me a lot to see errors of inattention like bad syntax. I use chatGPT do make a website.
 
 ## Author
 

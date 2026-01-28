@@ -1,8 +1,23 @@
 [mysqld]
+# Section for the main MariaDB/MySQL server settings
+
 user            = mysql
+# The MariaDB server will run under the 'mysql' system user
+
 socket          = /run/mysqld/mysqld.sock
+# Path to the Unix socket file for local connections
+
 port            = 3306
+# TCP port that MariaDB listens on for client connections
+
 datadir         = /var/lib/mysql
+# Directory where all database files are stored
+
 skip-networking = 0
+# Ensure networking is enabled (0 = false)
+
 bind_address    = 0.0.0.0
+# Listen on all network interfaces
+
 pid-file = /run/mysqld/mysqld.pid
+# Path to the PID file, which stores the process ID of the running MariaDB server

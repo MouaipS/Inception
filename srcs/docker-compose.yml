@@ -1,20 +1,20 @@
 services:
 ##============== MANDA ================##
   nginx:
-    container_name: nginx
-    build: ./requirements/nginx
-    networks:
+    container_name: nginx               #container name       
+    build: ./requirements/nginx         #path to Dockerfile
+    networks:                           #network name
       - inception
-    volumes:
+    volumes:                            #volumes mapping  
       - wordpress:/var/www/html
-    ports:
+    ports:                              #port mapping
       - "443:443"
-    depends_on:
+    depends_on:                         #dependency on other services
       - wordpress
-    restart: on-failure
+    restart: on-failure                 #restart policy  
 
   mariadb:
-    container_name: mariadb
+    container_name: mariadb         
     build: ./requirements/mariadb
     networks:
       - inception
@@ -23,12 +23,12 @@ services:
     env_file:
       - .env
     restart: on-failure
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${DB_ROOT_PASS}"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
-      start_period: 30s
+    healthcheck:                      # healthcheck configuration
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${DB_ROOT_PASS}"] #If MySQL responds with mysqld is alive, the container is marked healthy.
+      interval: 5s                   # Docker checks health every 5 seconds.
+      timeout: 5s                    # If the command doesn’t finish within 5 seconds → failure.  
+      retries: 10                    #After 10 consecutive failures, the container becomes unhealthy.
+      start_period: 30s              #Docker ignores failures during the first 30 seconds (gives MySQL time to boot).
 
   wordpress:
     container_name: wordpress
@@ -43,7 +43,7 @@ services:
         mariadb:
           condition: service_healthy
         redis:
-         condition: service_started
+          condition: service_started
     expose:
       - "9000"
     restart: on-failure
@@ -115,19 +115,19 @@ services:
 
 networks:
   inception:
-    name: inception
-    driver: bridge
+    name: inception 
+    driver: bridge #network driver
   
 ##============== VOLUMES ================##
 
 volumes:
   mariadb:
     name: mariadb
-    driver: local
-    driver_opts:
-      device: /home/adrouin/data/mariadb
-      o: bind
-      type: none
+    driver: local                             #volume driver
+    driver_opts:            #volume options 
+      device: /home/adrouin/data/mariadb      #path on the host
+      o: bind               #bind mount
+      type: none            #no specific filesystem type
   wordpress:
     name: wordpress
     driver: local

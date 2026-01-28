@@ -1,31 +1,66 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Inception</title>
+    <title>Beautiful Site</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1>Mon Portfolio</h1>
-        <p>Projet Inception - 42</p>
+        <nav class="navbar">
+            <div class="logo">MyBrand</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="btn">Get Started</a>
+        </nav>
+        <div class="hero">
+            <h1>Make Your Ideas Shine</h1>
+            <p>Modern web design, beautiful UI, and seamless user experience.</p>
+            <a href="#services" class="btn hero-btn">Learn More</a>
+        </div>
     </header>
-<main>
-    <section class="about">
-        <h2>À propos</h2>
-        <p>Site statique créé dans le cadre du projet Inception.</p>
+
+    <section id="about" class="section about">
+        <h2>About Us</h2>
+        <p>We create stunning websites that combine performance, beauty, and usability. Your success is our priority.</p>
     </section>
-    <section class="projects">
-        <h2>Projets</h2>
-        <div class="project-card">
-            <h3>Inception</h3>
-            <p>Infrastructure Docker avec WordPress, MariaDB et Nginx</p>
+
+    <section id="services" class="section services">
+        <h2>Our Services</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>Web Design</h3>
+                <p>Beautiful, responsive designs that look great on any device.</p>
+            </div>
+            <div class="card">
+                <h3>Development</h3>
+                <p>Clean, scalable code for fast and reliable websites.</p>
+            </div>
+            <div class="card">
+                <h3>SEO & Marketing</h3>
+                <p>Optimize your website to reach more users and grow your business.</p>
+            </div>
         </div>
     </section>
-</main>
+
+    <section id="contact" class="section contact">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
     <footer>
-        <p>© 2025 - adrouin.42.fr</p>
+        <p>&copy; 2026 MyBrand. All rights reserved.</p>
     </footer>
 </body>
 </html>
